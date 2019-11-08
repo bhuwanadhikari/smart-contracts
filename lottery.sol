@@ -3,15 +3,12 @@ pragma solidity ^0.5.11;
 contract Lottery {
     address[] public players; // dynamic array with address of players
     address public manager;
-    
     constructor() public{
         manager = msg.sender; //deployer of contract is msg.sender
     }
-    
     function () external payable {
         require(msg.value >= 0.01 ether);
-            players.push(msg.sender); //addr of ether sender is msg.sender
-        
+        players.push(msg.sender); //addr of ether sender is msg.sender
     }
     
     function getBalance() public view returns(uint){
@@ -29,13 +26,8 @@ contract Lottery {
         uint r = random();
         address payable winner;
         winner = address(uint160(players[r % players.length]));
-        
         winner.transfer(address(this).balance); //transfer contract balance to winner
-        
         //reset the players array
         players = new address[](0); // array of length 0
-        
-        
     }
-    
 }
