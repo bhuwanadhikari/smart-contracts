@@ -20,7 +20,7 @@ contract Lottery {
         return uint8(uint256(keccak256(abi.encodePacked(block.timestamp, block.difficulty, players.length)))%251);
     } 
     
-    
+    //function that selects the winner
     function selectWinner () public  {
         require(msg.sender == manager);
         uint r = random();
